@@ -64,6 +64,14 @@ import { usePlasmicDataSourceContext } from "@plasmicapp/data-sources-context";
 
 import PageLayout from "../../PageLayout"; // plasmic-import: F00Sp4XitsTS/component
 import { SupabaseProvider } from "../../../index"; // plasmic-import: qgD3MkvVXvYg/codeComponent
+import { FormWrapper } from "@plasmicpkgs/antd5/skinny/Form";
+import { formHelpers as FormWrapper_Helpers } from "@plasmicpkgs/antd5/skinny/Form";
+import { FormItemWrapper } from "@plasmicpkgs/antd5/skinny/FormItem";
+import { AntdInput } from "@plasmicpkgs/antd5/skinny/registerInput";
+import { inputHelpers as AntdInput_Helpers } from "@plasmicpkgs/antd5/skinny/registerInput";
+import { AntdPassword } from "@plasmicpkgs/antd5/skinny/registerInput";
+import { inputHelpers as AntdPassword_Helpers } from "@plasmicpkgs/antd5/skinny/registerInput";
+import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
@@ -89,6 +97,10 @@ export type PlasmicHomepage__OverridesType = {
   section?: Flex__<"section">;
   h1?: Flex__<"h1">;
   supabaseProvider?: Flex__<typeof SupabaseProvider>;
+  form?: Flex__<typeof FormWrapper>;
+  input?: Flex__<typeof AntdInput>;
+  passwordInput?: Flex__<typeof AntdPassword>;
+  button?: Flex__<typeof AntdButton>;
 };
 
 export interface DefaultHomepageProps {}
@@ -131,7 +143,39 @@ function PlasmicHomepage__RenderFunc(props: {
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
+  const $globalActions = useGlobalActions?.();
+
   const currentUser = useCurrentUser?.() || {};
+
+  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
+    () => [
+      {
+        path: "form.value",
+        type: "private",
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined,
+
+        refName: "form",
+        onMutate: generateOnMutateForSpec("value", FormWrapper_Helpers)
+      },
+      {
+        path: "form.isSubmitting",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false,
+
+        refName: "form",
+        onMutate: generateOnMutateForSpec("isSubmitting", FormWrapper_Helpers)
+      }
+    ],
+    [$props, $ctx, $refs]
+  );
+  const $state = useDollarState(stateSpecs, {
+    $props,
+    $ctx,
+    $queries: {},
+    $refs
+  });
 
   return (
     <React.Fragment>
@@ -183,7 +227,21 @@ function PlasmicHomepage__RenderFunc(props: {
                         sty.h1
                       )}
                     >
-                      {"Untitled page"}
+                      <React.Fragment>
+                        {(() => {
+                          try {
+                            return currentUser.email;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return "Untitled page";
+                            }
+                            throw e;
+                          }
+                        })()}
+                      </React.Fragment>
                     </h1>
                     <div
                       className={classNames(
@@ -308,6 +366,156 @@ function PlasmicHomepage__RenderFunc(props: {
                       }
                     </DataCtxReader__>
                   </SupabaseProvider>
+                  {(() => {
+                    const child$Props = {
+                      className: classNames("__wab_instance", sty.form),
+                      extendedOnValuesChange: async (...eventArgs: any) => {
+                        generateStateOnChangePropForCodeComponents(
+                          $state,
+                          "value",
+                          ["form", "value"],
+                          FormWrapper_Helpers
+                        ).apply(null, eventArgs);
+
+                        (async (changedValues, allValues) => {
+                          const $steps = {};
+
+                          $steps["invokeGlobalAction"] = true
+                            ? (() => {
+                                const actionArgs = {
+                                  args: [
+                                    (() => {
+                                      try {
+                                        return $state.form.value.email;
+                                      } catch (e) {
+                                        if (
+                                          e instanceof TypeError ||
+                                          e?.plasmicType ===
+                                            "PlasmicUndefinedDataError"
+                                        ) {
+                                          return undefined;
+                                        }
+                                        throw e;
+                                      }
+                                    })(),
+                                    (() => {
+                                      try {
+                                        return $state.form.value.password;
+                                      } catch (e) {
+                                        if (
+                                          e instanceof TypeError ||
+                                          e?.plasmicType ===
+                                            "PlasmicUndefinedDataError"
+                                        ) {
+                                          return undefined;
+                                        }
+                                        throw e;
+                                      }
+                                    })()
+                                  ]
+                                };
+                                return $globalActions[
+                                  "SupabaseUserGlobalContext.login"
+                                ]?.apply(null, [...actionArgs.args]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["invokeGlobalAction"] != null &&
+                            typeof $steps["invokeGlobalAction"] === "object" &&
+                            typeof $steps["invokeGlobalAction"].then ===
+                              "function"
+                          ) {
+                            $steps["invokeGlobalAction"] = await $steps[
+                              "invokeGlobalAction"
+                            ];
+                          }
+                        }).apply(null, eventArgs);
+                      },
+                      formItems: undefined,
+                      labelCol: { span: 8, horizontalOnly: true },
+                      layout: "vertical",
+                      mode: undefined,
+                      onIsSubmittingChange: async (...eventArgs: any) => {
+                        generateStateOnChangePropForCodeComponents(
+                          $state,
+                          "isSubmitting",
+                          ["form", "isSubmitting"],
+                          FormWrapper_Helpers
+                        ).apply(null, eventArgs);
+                      },
+                      ref: ref => {
+                        $refs["form"] = ref;
+                      },
+                      wrapperCol: { span: 16, horizontalOnly: true }
+                    };
+                    initializeCodeComponentStates(
+                      $state,
+                      [
+                        {
+                          name: "value",
+                          plasmicStateName: "form.value"
+                        },
+                        {
+                          name: "isSubmitting",
+                          plasmicStateName: "form.isSubmitting"
+                        }
+                      ],
+                      [],
+                      FormWrapper_Helpers ?? {},
+                      child$Props
+                    );
+
+                    return (
+                      <FormWrapper
+                        data-plasmic-name={"form"}
+                        data-plasmic-override={overrides.form}
+                        {...child$Props}
+                      >
+                        <FormItemWrapper
+                          className={classNames(
+                            "__wab_instance",
+                            sty.formField___5ZizG
+                          )}
+                          label={"Email"}
+                          name={"email"}
+                        >
+                          <AntdInput
+                            className={classNames("__wab_instance", sty.input)}
+                          />
+                        </FormItemWrapper>
+                        <FormItemWrapper
+                          className={classNames(
+                            "__wab_instance",
+                            sty.formField___0A4Kx
+                          )}
+                          label={"Password"}
+                          name={"password"}
+                        >
+                          <AntdPassword
+                            className={classNames(
+                              "__wab_instance",
+                              sty.passwordInput
+                            )}
+                          />
+                        </FormItemWrapper>
+                        <AntdButton
+                          className={classNames("__wab_instance", sty.button)}
+                          submitsForm={true}
+                          type={"primary"}
+                        >
+                          <div
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.text__oGgK7
+                            )}
+                          >
+                            {"Submit"}
+                          </div>
+                        </AntdButton>
+                      </FormWrapper>
+                    );
+                  })()}
                 </React.Fragment>
               )}
             </DataCtxReader__>
@@ -319,11 +527,34 @@ function PlasmicHomepage__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "pageLayout", "section", "h1", "supabaseProvider"],
-  pageLayout: ["pageLayout", "section", "h1", "supabaseProvider"],
+  root: [
+    "root",
+    "pageLayout",
+    "section",
+    "h1",
+    "supabaseProvider",
+    "form",
+    "input",
+    "passwordInput",
+    "button"
+  ],
+  pageLayout: [
+    "pageLayout",
+    "section",
+    "h1",
+    "supabaseProvider",
+    "form",
+    "input",
+    "passwordInput",
+    "button"
+  ],
   section: ["section", "h1"],
   h1: ["h1"],
-  supabaseProvider: ["supabaseProvider"]
+  supabaseProvider: ["supabaseProvider"],
+  form: ["form", "input", "passwordInput", "button"],
+  input: ["input"],
+  passwordInput: ["passwordInput"],
+  button: ["button"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -334,6 +565,10 @@ type NodeDefaultElementType = {
   section: "section";
   h1: "h1";
   supabaseProvider: typeof SupabaseProvider;
+  form: typeof FormWrapper;
+  input: typeof AntdInput;
+  passwordInput: typeof AntdPassword;
+  button: typeof AntdButton;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -425,6 +660,10 @@ export const PlasmicHomepage = Object.assign(
     section: makeNodeComponent("section"),
     h1: makeNodeComponent("h1"),
     supabaseProvider: makeNodeComponent("supabaseProvider"),
+    form: makeNodeComponent("form"),
+    input: makeNodeComponent("input"),
+    passwordInput: makeNodeComponent("passwordInput"),
+    button: makeNodeComponent("button"),
 
     // Metadata about props expected for PlasmicHomepage
     internalVariantProps: PlasmicHomepage__VariantProps,

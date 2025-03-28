@@ -569,6 +569,12 @@
           "name": "SupabaseProvider",
           "displayName": "SupabaseProvider",
           "componentImportPath": "./index"
+        },
+        {
+          "id": "kU9xmVPnD9IW",
+          "name": "SupabaseUserGlobalContext",
+          "displayName": "SupabaseUserGlobalContext",
+          "componentImportPath": "./index"
         }
       ],
       "customFunctions": []

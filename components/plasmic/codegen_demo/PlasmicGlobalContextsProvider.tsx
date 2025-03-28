@@ -7,18 +7,23 @@
 import * as React from "react";
 import { hasVariant, ensureGlobalVariants } from "@plasmicapp/react-web";
 import { AntdConfigProvider } from "@plasmicpkgs/antd5/skinny/registerConfigProvider";
+import { SupabaseUserGlobalContext } from "../../../index"; // plasmic-import: kU9xmVPnD9IW/codeComponent
 
 export interface GlobalContextsProviderProps {
   children?: React.ReactElement;
   antdConfigProviderProps?: Partial<
     Omit<React.ComponentProps<typeof AntdConfigProvider>, "children">
   >;
+  supabaseUserGlobalContextProps?: Partial<
+    Omit<React.ComponentProps<typeof SupabaseUserGlobalContext>, "children">
+  >;
 }
 
 export default function GlobalContextsProvider(
   props: GlobalContextsProviderProps
 ) {
-  const { children, antdConfigProviderProps } = props;
+  const { children, antdConfigProviderProps, supabaseUserGlobalContextProps } =
+    props;
 
   return (
     <AntdConfigProvider
@@ -113,7 +118,17 @@ export default function GlobalContextsProvider(
           : false
       }
     >
-      {children}
+      <SupabaseUserGlobalContext
+        {...supabaseUserGlobalContextProps}
+        defaultRedirectOnLoginSuccess={
+          supabaseUserGlobalContextProps &&
+          "defaultRedirectOnLoginSuccess" in supabaseUserGlobalContextProps
+            ? supabaseUserGlobalContextProps.defaultRedirectOnLoginSuccess!
+            : undefined
+        }
+      >
+        {children}
+      </SupabaseUserGlobalContext>
     </AntdConfigProvider>
   );
 }
