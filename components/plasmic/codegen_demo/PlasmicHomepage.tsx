@@ -63,7 +63,6 @@ import * as plasmicAuth from "@plasmicapp/react-web/lib/auth";
 import { usePlasmicDataSourceContext } from "@plasmicapp/data-sources-context";
 
 import PageLayout from "../../PageLayout"; // plasmic-import: F00Sp4XitsTS/component
-import { SupabaseProvider } from "../../../index"; // plasmic-import: qgD3MkvVXvYg/codeComponent
 import { FormWrapper } from "@plasmicpkgs/antd5/skinny/Form";
 import { formHelpers as FormWrapper_Helpers } from "@plasmicpkgs/antd5/skinny/Form";
 import { FormItemWrapper } from "@plasmicpkgs/antd5/skinny/FormItem";
@@ -96,7 +95,6 @@ export type PlasmicHomepage__OverridesType = {
   pageLayout?: Flex__<typeof PageLayout>;
   section?: Flex__<"section">;
   h1?: Flex__<"h1">;
-  supabaseProvider?: Flex__<typeof SupabaseProvider>;
   form?: Flex__<typeof FormWrapper>;
   input?: Flex__<typeof AntdInput>;
   passwordInput?: Flex__<typeof AntdPassword>;
@@ -255,117 +253,6 @@ function PlasmicHomepage__RenderFunc(props: {
                       }
                     </div>
                   </section>
-                  <SupabaseProvider
-                    data-plasmic-name={"supabaseProvider"}
-                    data-plasmic-override={overrides.supabaseProvider}
-                    className={classNames(
-                      "__wab_instance",
-                      sty.supabaseProvider
-                    )}
-                    columns={"*"}
-                    loading={
-                      <DataCtxReader__>
-                        {$ctx => (
-                          <div
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.text__e5YW6
-                            )}
-                          >
-                            {"Loading..."}
-                          </div>
-                        )}
-                      </DataCtxReader__>
-                    }
-                    noData={
-                      <DataCtxReader__>
-                        {$ctx => (
-                          <div
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.text___6Puv
-                            )}
-                          >
-                            {"No data"}
-                          </div>
-                        )}
-                      </DataCtxReader__>
-                    }
-                    queryName={"test"}
-                    ref={ref => {
-                      $refs["supabaseProvider"] = ref;
-                    }}
-                    tableName={"project"}
-                    uniqueIdentifierField={"id"}
-                    validating={
-                      <DataCtxReader__>
-                        {$ctx => (
-                          <div
-                            className={classNames(
-                              projectcss.all,
-                              projectcss.__wab_text,
-                              sty.text__o4VL1
-                            )}
-                          >
-                            {"Validating..."}
-                          </div>
-                        )}
-                      </DataCtxReader__>
-                    }
-                  >
-                    <DataCtxReader__>
-                      {$ctx =>
-                        (_par =>
-                          !_par ? [] : Array.isArray(_par) ? _par : [_par])(
-                          (() => {
-                            try {
-                              return $ctx.test.data;
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return [];
-                              }
-                              throw e;
-                            }
-                          })()
-                        ).map((__plasmic_item_0, __plasmic_idx_0) => {
-                          const currentItem = __plasmic_item_0;
-                          const currentIndex = __plasmic_idx_0;
-                          return (
-                            <div
-                              className={classNames(
-                                projectcss.all,
-                                projectcss.__wab_text,
-                                sty.text___3Kz3E
-                              )}
-                              key={currentIndex}
-                            >
-                              <React.Fragment>
-                                {(() => {
-                                  try {
-                                    return currentItem.name;
-                                  } catch (e) {
-                                    if (
-                                      e instanceof TypeError ||
-                                      e?.plasmicType ===
-                                        "PlasmicUndefinedDataError"
-                                    ) {
-                                      return "";
-                                    }
-                                    throw e;
-                                  }
-                                })()}
-                              </React.Fragment>
-                            </div>
-                          );
-                        })
-                      }
-                    </DataCtxReader__>
-                  </SupabaseProvider>
                   {(() => {
                     const child$Props = {
                       className: classNames("__wab_instance", sty.form),
@@ -474,7 +361,7 @@ function PlasmicHomepage__RenderFunc(props: {
                         <FormItemWrapper
                           className={classNames(
                             "__wab_instance",
-                            sty.formField___5ZizG
+                            sty.formField__f3OWp
                           )}
                           label={"Email"}
                           name={"email"}
@@ -486,7 +373,7 @@ function PlasmicHomepage__RenderFunc(props: {
                         <FormItemWrapper
                           className={classNames(
                             "__wab_instance",
-                            sty.formField___0A4Kx
+                            sty.formField__lHrC7
                           )}
                           label={"Password"}
                           name={"password"}
@@ -507,7 +394,7 @@ function PlasmicHomepage__RenderFunc(props: {
                             className={classNames(
                               projectcss.all,
                               projectcss.__wab_text,
-                              sty.text__oGgK7
+                              sty.text__vpAXh
                             )}
                           >
                             {"Submit"}
@@ -532,7 +419,6 @@ const PlasmicDescendants = {
     "pageLayout",
     "section",
     "h1",
-    "supabaseProvider",
     "form",
     "input",
     "passwordInput",
@@ -542,7 +428,6 @@ const PlasmicDescendants = {
     "pageLayout",
     "section",
     "h1",
-    "supabaseProvider",
     "form",
     "input",
     "passwordInput",
@@ -550,7 +435,6 @@ const PlasmicDescendants = {
   ],
   section: ["section", "h1"],
   h1: ["h1"],
-  supabaseProvider: ["supabaseProvider"],
   form: ["form", "input", "passwordInput", "button"],
   input: ["input"],
   passwordInput: ["passwordInput"],
@@ -564,7 +448,6 @@ type NodeDefaultElementType = {
   pageLayout: typeof PageLayout;
   section: "section";
   h1: "h1";
-  supabaseProvider: typeof SupabaseProvider;
   form: typeof FormWrapper;
   input: typeof AntdInput;
   passwordInput: typeof AntdPassword;
@@ -659,7 +542,6 @@ export const PlasmicHomepage = Object.assign(
     pageLayout: makeNodeComponent("pageLayout"),
     section: makeNodeComponent("section"),
     h1: makeNodeComponent("h1"),
-    supabaseProvider: makeNodeComponent("supabaseProvider"),
     form: makeNodeComponent("form"),
     input: makeNodeComponent("input"),
     passwordInput: makeNodeComponent("passwordInput"),

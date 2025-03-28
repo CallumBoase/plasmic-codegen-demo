@@ -563,18 +563,6 @@
           "name": "Fetcher",
           "displayName": "plasmic-data-source-fetcher",
           "componentImportPath": "@plasmicapp/react-web/lib/data-sources"
-        },
-        {
-          "id": "qgD3MkvVXvYg",
-          "name": "SupabaseProvider",
-          "displayName": "SupabaseProvider",
-          "componentImportPath": "./index"
-        },
-        {
-          "id": "kU9xmVPnD9IW",
-          "name": "SupabaseUserGlobalContext",
-          "displayName": "SupabaseUserGlobalContext",
-          "componentImportPath": "./index"
         }
       ],
       "customFunctions": []

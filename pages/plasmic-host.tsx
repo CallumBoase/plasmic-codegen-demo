@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { PlasmicCanvasHost, registerComponent, registerGlobalContext } from '@plasmicapp/react-web/lib/host';
-import { 
-  SupabaseProvider,
-  SupabaseProviderMeta,
-  SupabaseUserGlobalContext,
-  SupabaseUserGlobalContextMeta,
-} from 'plasmic-supabase';
+// import { 
+//   SupabaseProvider,
+//   SupabaseProviderMeta,
+//   SupabaseUserGlobalContext,
+//   SupabaseUserGlobalContextMeta,
+// } from 'plasmic-supabase';
 
 // You can register any code components that you want to use here; see
 // https://docs.plasmic.app/learn/code-components-ref/
@@ -16,9 +16,9 @@ import {
 
 // registerComponent(...)
 
-registerGlobalContext(SupabaseUserGlobalContext, SupabaseUserGlobalContextMeta);
+// registerGlobalContext(SupabaseUserGlobalContext, SupabaseUserGlobalContextMeta);
 
-registerComponent(SupabaseProvider, SupabaseProviderMeta);
+// registerComponent(SupabaseProvider, SupabaseProviderMeta);
 
 export default function PlasmicHost() {
   return <PlasmicCanvasHost />;

@@ -16,7 +16,6 @@
     "@plasmicpkgs/plasmic-basic-components": "^0.0.234",
     "@plasmicpkgs/plasmic-rich-components": "^1.0.207",
     "next": "14.2.26",
-    "plasmic-supabase": "^0.4.1",
     "react": "^18",
     "react-dom": "^18"
   },
