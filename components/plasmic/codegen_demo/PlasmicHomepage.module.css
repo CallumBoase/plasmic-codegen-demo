@@ -53,8 +53,39 @@
   height: auto;
   min-width: 0;
 }
-.text {
+.text__aClg5 {
   position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.supabaseProvider:global(.__wab_instance) {
+  max-width: 100%;
+  object-fit: cover;
+}
+.text__e5YW6 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.text__o4VL1 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.text___6Puv {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+.text___3Kz3E {
   width: 100%;
   height: auto;
   max-width: 100%;

@@ -63,6 +63,7 @@ import * as plasmicAuth from "@plasmicapp/react-web/lib/auth";
 import { usePlasmicDataSourceContext } from "@plasmicapp/data-sources-context";
 
 import PageLayout from "../../PageLayout"; // plasmic-import: F00Sp4XitsTS/component
+import { SupabaseProvider } from "../../../index"; // plasmic-import: qgD3MkvVXvYg/codeComponent
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 
@@ -87,7 +88,7 @@ export type PlasmicHomepage__OverridesType = {
   pageLayout?: Flex__<typeof PageLayout>;
   section?: Flex__<"section">;
   h1?: Flex__<"h1">;
-  text?: Flex__<"div">;
+  supabaseProvider?: Flex__<typeof SupabaseProvider>;
 };
 
 export interface DefaultHomepageProps {}
@@ -166,37 +167,148 @@ function PlasmicHomepage__RenderFunc(props: {
           >
             <DataCtxReader__>
               {$ctx => (
-                <section
-                  data-plasmic-name={"section"}
-                  data-plasmic-override={overrides.section}
-                  className={classNames(projectcss.all, sty.section)}
-                >
-                  <h1
-                    data-plasmic-name={"h1"}
-                    data-plasmic-override={overrides.h1}
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.h1,
-                      projectcss.__wab_text,
-                      sty.h1
-                    )}
+                <React.Fragment>
+                  <section
+                    data-plasmic-name={"section"}
+                    data-plasmic-override={overrides.section}
+                    className={classNames(projectcss.all, sty.section)}
                   >
-                    {"Untitled page"}
-                  </h1>
-                  <div
-                    data-plasmic-name={"text"}
-                    data-plasmic-override={overrides.text}
+                    <h1
+                      data-plasmic-name={"h1"}
+                      data-plasmic-override={overrides.h1}
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.h1,
+                        projectcss.__wab_text,
+                        sty.h1
+                      )}
+                    >
+                      {"Untitled page"}
+                    </h1>
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__aClg5
+                      )}
+                    >
+                      {
+                        "Press the big blue + button to insert components like Tables, Text, Buttons, and Forms.\n\nJoin our Slack Community (icon in bottom left) for help!"
+                      }
+                    </div>
+                  </section>
+                  <SupabaseProvider
+                    data-plasmic-name={"supabaseProvider"}
+                    data-plasmic-override={overrides.supabaseProvider}
                     className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text
+                      "__wab_instance",
+                      sty.supabaseProvider
                     )}
-                  >
-                    {
-                      "Press the big blue + button to insert components like Tables, Text, Buttons, and Forms.\n\nJoin our Slack Community (icon in bottom left) for help!"
+                    columns={"*"}
+                    loading={
+                      <DataCtxReader__>
+                        {$ctx => (
+                          <div
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.text__e5YW6
+                            )}
+                          >
+                            {"Loading..."}
+                          </div>
+                        )}
+                      </DataCtxReader__>
                     }
-                  </div>
-                </section>
+                    noData={
+                      <DataCtxReader__>
+                        {$ctx => (
+                          <div
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.text___6Puv
+                            )}
+                          >
+                            {"No data"}
+                          </div>
+                        )}
+                      </DataCtxReader__>
+                    }
+                    queryName={"test"}
+                    ref={ref => {
+                      $refs["supabaseProvider"] = ref;
+                    }}
+                    tableName={"project"}
+                    uniqueIdentifierField={"id"}
+                    validating={
+                      <DataCtxReader__>
+                        {$ctx => (
+                          <div
+                            className={classNames(
+                              projectcss.all,
+                              projectcss.__wab_text,
+                              sty.text__o4VL1
+                            )}
+                          >
+                            {"Validating..."}
+                          </div>
+                        )}
+                      </DataCtxReader__>
+                    }
+                  >
+                    <DataCtxReader__>
+                      {$ctx =>
+                        (_par =>
+                          !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                          (() => {
+                            try {
+                              return $ctx.test.data;
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return [];
+                              }
+                              throw e;
+                            }
+                          })()
+                        ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                          const currentItem = __plasmic_item_0;
+                          const currentIndex = __plasmic_idx_0;
+                          return (
+                            <div
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.__wab_text,
+                                sty.text___3Kz3E
+                              )}
+                              key={currentIndex}
+                            >
+                              <React.Fragment>
+                                {(() => {
+                                  try {
+                                    return currentItem.name;
+                                  } catch (e) {
+                                    if (
+                                      e instanceof TypeError ||
+                                      e?.plasmicType ===
+                                        "PlasmicUndefinedDataError"
+                                    ) {
+                                      return "";
+                                    }
+                                    throw e;
+                                  }
+                                })()}
+                              </React.Fragment>
+                            </div>
+                          );
+                        })
+                      }
+                    </DataCtxReader__>
+                  </SupabaseProvider>
+                </React.Fragment>
               )}
             </DataCtxReader__>
           </PageLayout>
@@ -207,11 +319,11 @@ function PlasmicHomepage__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "pageLayout", "section", "h1", "text"],
-  pageLayout: ["pageLayout", "section", "h1", "text"],
-  section: ["section", "h1", "text"],
+  root: ["root", "pageLayout", "section", "h1", "supabaseProvider"],
+  pageLayout: ["pageLayout", "section", "h1", "supabaseProvider"],
+  section: ["section", "h1"],
   h1: ["h1"],
-  text: ["text"]
+  supabaseProvider: ["supabaseProvider"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -221,7 +333,7 @@ type NodeDefaultElementType = {
   pageLayout: typeof PageLayout;
   section: "section";
   h1: "h1";
-  text: "div";
+  supabaseProvider: typeof SupabaseProvider;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -312,7 +424,7 @@ export const PlasmicHomepage = Object.assign(
     pageLayout: makeNodeComponent("pageLayout"),
     section: makeNodeComponent("section"),
     h1: makeNodeComponent("h1"),
-    text: makeNodeComponent("text"),
+    supabaseProvider: makeNodeComponent("supabaseProvider"),
 
     // Metadata about props expected for PlasmicHomepage
     internalVariantProps: PlasmicHomepage__VariantProps,
